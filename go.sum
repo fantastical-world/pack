@@ -1,8 +1,8 @@
 github.com/boltdb/bolt v1.3.1 h1:JQmyP4ZBrce+ZQu0dY660FMfatumYDLun9hBCUVIkF4=
 github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx27Ps=
-github.com/fantastical-world/dice v0.17.0 h1:p8cC9KSmY6tbOaSyk63TGJx0P7LrtSrYN3btubYwDN8=
-github.com/fantastical-world/dice v0.17.0/go.mod h1:WE4AvrpBOIABXOajCpBavM2tJi3rPBGK5TMa43Ox3w8=
-github.com/fantastical-world/tables v0.15.0 h1:4rRAXkWkvw7JeRE80MN3iEob7i54pwiPMCE+SG5U1D0=
-github.com/fantastical-world/tables v0.15.0/go.mod h1:C+cvucHUZ/sr6Q/asu+D1cE21sfd220ApkVX7KZPjko=
+github.com/fantastical-world/dice v0.20.0 h1:oUcvy1lZm35dtX3R9r3A8FqtcHOtTVYJH2jxFPXlp60=
+github.com/fantastical-world/dice v0.20.0/go.mod h1:WE4AvrpBOIABXOajCpBavM2tJi3rPBGK5TMa43Ox3w8=
+github.com/fantastical-world/tables v0.16.0 h1:rZoq1TFhFHcdzdpJsJmVSyKUgfXqxYm2piVBlPM7JSA=
+github.com/fantastical-world/tables v0.16.0/go.mod h1:EfOj/ywgsM1T3QDQjXHqyMhkbQTob1eFGojP4U5OuPk=
 golang.org/x/sys v0.0.0-20210603125802-9665404d3644 h1:CA1DEQ4NdKphKeL70tvsWNdT5oFh1lOjihRcEDROi0I=
 golang.org/x/sys v0.0.0-20210603125802-9665404d3644/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
