@@ -1,8 +1,5 @@
-github.com/boltdb/bolt v1.3.1 h1:JQmyP4ZBrce+ZQu0dY660FMfatumYDLun9hBCUVIkF4=
-github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx27Ps=
-github.com/fantastical-world/dice v0.20.0 h1:oUcvy1lZm35dtX3R9r3A8FqtcHOtTVYJH2jxFPXlp60=
-github.com/fantastical-world/dice v0.20.0/go.mod h1:WE4AvrpBOIABXOajCpBavM2tJi3rPBGK5TMa43Ox3w8=
-github.com/fantastical-world/tables v0.16.0 h1:rZoq1TFhFHcdzdpJsJmVSyKUgfXqxYm2piVBlPM7JSA=
-github.com/fantastical-world/tables v0.16.0/go.mod h1:EfOj/ywgsM1T3QDQjXHqyMhkbQTob1eFGojP4U5OuPk=
+go.etcd.io/bbolt v1.3.6 h1:/ecaJf0sk1l4l6V4awd65v2C3ILy7MSj+s/x1ADCIMU=
+go.etcd.io/bbolt v1.3.6/go.mod h1:qXsaaIqmgQH0T+OPdb99Bf+PKfBBQVAdyD6TY9G8XM4=
+golang.org/x/sys v0.0.0-20200923182605-d9f96fdee20d/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20210603125802-9665404d3644 h1:CA1DEQ4NdKphKeL70tvsWNdT5oFh1lOjihRcEDROi0I=
 golang.org/x/sys v0.0.0-20210603125802-9665404d3644/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=

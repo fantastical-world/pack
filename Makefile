@@ -24,7 +24,7 @@ release: dirty-check clean build test
 # target: test - runs tests and generates coverage reports
 test:
 	mkdir -p results
-	go test ./... -cover -coverprofile=results/tc.out
+	go test -race ./... -cover -coverprofile=results/tc.out
 	go tool cover -html=results/tc.out -o results/coverage.html
 
 # target: dirty-check - will check if repo is dirty
