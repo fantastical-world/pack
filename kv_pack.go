@@ -1,6 +1,7 @@
 package pack
 
 import (
+	"encoding/json"
 	"sort"
 	"sync"
 	"time"
@@ -127,4 +128,39 @@ func (k *KVPack) List(location string) ([]string, error) {
 	})
 
 	return things, nil
+}
+
+func (k *KVPack) ListMeta(location string) ([]interface{}, error) {
+	k.Lock()
+	defer k.Unlock()
+	var metas []interface{}
+	db, err := bbolt.Open(k.dbLocation, 0600, &bbolt.Options{Timeout: k.timeout})
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+	err = db.Update(func(tx *bbolt.Tx) error {
+		b, _ := tx.CreateBucketIfNotExists([]byte(location))
+		c := b.Cursor()
+		for k, v := c.First(); k != nil; k, v = c.Next() {
+			temp := make(map[string]interface{})
+			err := json.Unmarshal(v, &temp)
+			if err != nil {
+				return err
+			}
+
+			meta, found := temp["meta"]
+			if found {
+				metas = append(metas, meta)
+			}
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return metas, nil
 }

@@ -18,4 +18,5 @@ type Pack interface {
 	Get(location, name string) ([]byte, error)
 	Delete(location, name string) error
 	List(location string) ([]string, error)
+	ListMeta(location string) ([]interface{}, error)
 }
