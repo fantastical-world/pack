@@ -1,10 +1,10 @@
 package pack
 
-type PackError string
+type Error string
 
-func (pe PackError) Error() string { return string(pe) }
+func (pe Error) Error() string { return string(pe) }
 
-const ErrThingDoesNotExist = PackError("thing does not exist")
+const ErrThingDoesNotExist = Error("thing does not exist")
 
 //Packable is something that can be stored in a Pack.
 type Packable interface {

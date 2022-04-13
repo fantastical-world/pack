@@ -115,6 +115,20 @@ func TestKVPack_Get(t *testing.T) {
 		}
 	})
 
+	t.Run("validate that get returns error if thing does not exist", func(t *testing.T) {
+		_, got := db.Get("__TEST__", "NOPE")
+		if got != ErrThingDoesNotExist {
+			t.Errorf("want %s, got %s", ErrThingDoesNotExist, got)
+		}
+	})
+
+	t.Run("validate that get returns error if bucket does not exist", func(t *testing.T) {
+		_, got := db.Get("__NOT__", "NOPE")
+		if got != ErrThingDoesNotExist {
+			t.Errorf("want %s, got %s", ErrThingDoesNotExist, got)
+		}
+	})
+
 	err := os.Remove("./test.db")
 	if err != nil {
 		t.Errorf("unexpected err encountered, %s", err)
@@ -156,6 +170,13 @@ func TestKVPack_Delete(t *testing.T) {
 	})
 
 	t.Run("validate that delete returns an error if thing does not exist", func(t *testing.T) {
+		err := db.Delete("__TEST__", "IDONT")
+		if err != ErrThingDoesNotExist {
+			t.Errorf("want %s, got %s", ErrThingDoesNotExist, err)
+		}
+	})
+
+	t.Run("validate that delete returns an error if bucket does not exist", func(t *testing.T) {
 		err := db.Delete("IDONTEXIST", "IDONT")
 		if err != ErrThingDoesNotExist {
 			t.Errorf("want %s, got %s", ErrThingDoesNotExist, err)
@@ -197,6 +218,13 @@ func TestKVPack_List(t *testing.T) {
 		want := []string{"heyo", "heyo2", "heyo3"}
 		if !reflect.DeepEqual(want, got) {
 			t.Errorf("want %v, got %v", want, got)
+		}
+	})
+
+	t.Run("validate that list returns no error if bucket does not exist", func(t *testing.T) {
+		_, err := db.List("IDONTEXIST")
+		if err != nil {
+			t.Errorf("want nil, got %s", err)
 		}
 	})
 
@@ -374,6 +402,13 @@ func TestKVPack_ListMeta(t *testing.T) {
 
 		if len(got) != 0 {
 			t.Errorf("want 0, got %d", len(got))
+		}
+	})
+
+	t.Run("validate that meta returns no error if bucket does not exist", func(t *testing.T) {
+		_, err := db.ListMeta("IDONTEXIST")
+		if err != nil {
+			t.Errorf("want nil, got %s", err)
 		}
 	})
 

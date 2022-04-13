@@ -29,7 +29,7 @@ func (k *KVPack) Save(location string, thing Packable) error {
 	if err != nil {
 		return err
 	}
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 	err = db.Update(func(tx *bbolt.Tx) error {
 		b, _ := tx.CreateBucketIfNotExists([]byte(location))
 		name, bytes := thing.Pack()
@@ -56,9 +56,12 @@ func (k *KVPack) Get(location, name string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer db.Close()
-	err = db.Update(func(tx *bbolt.Tx) error {
-		b, _ := tx.CreateBucketIfNotExists([]byte(location))
+	defer func() { _ = db.Close() }()
+	err = db.View(func(tx *bbolt.Tx) error {
+		b := tx.Bucket([]byte(location))
+		if b == nil {
+			return ErrThingDoesNotExist
+		}
 		bytes := b.Get([]byte(name))
 		if bytes == nil {
 			return ErrThingDoesNotExist
@@ -84,9 +87,12 @@ func (k *KVPack) Delete(location, name string) error {
 	if err != nil {
 		return err
 	}
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 	err = db.Update(func(tx *bbolt.Tx) error {
-		b, _ := tx.CreateBucketIfNotExists([]byte(location))
+		b := tx.Bucket([]byte(location))
+		if b == nil {
+			return ErrThingDoesNotExist
+		}
 		bytes := b.Get([]byte(name))
 		if bytes == nil {
 			return ErrThingDoesNotExist
@@ -112,9 +118,12 @@ func (k *KVPack) List(location string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer db.Close()
-	db.Update(func(tx *bbolt.Tx) error {
-		b, _ := tx.CreateBucketIfNotExists([]byte(location))
+	defer func() { _ = db.Close() }()
+	_ = db.View(func(tx *bbolt.Tx) error {
+		b := tx.Bucket([]byte(location))
+		if b == nil {
+			return nil
+		}
 		c := b.Cursor()
 		for k, _ := c.First(); k != nil; k, _ = c.Next() {
 			things = append(things, string(k))
@@ -138,9 +147,12 @@ func (k *KVPack) ListMeta(location string) ([]interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer db.Close()
-	err = db.Update(func(tx *bbolt.Tx) error {
-		b, _ := tx.CreateBucketIfNotExists([]byte(location))
+	defer func() { _ = db.Close() }()
+	err = db.View(func(tx *bbolt.Tx) error {
+		b := tx.Bucket([]byte(location))
+		if b == nil {
+			return nil
+		}
 		c := b.Cursor()
 		for k, v := c.First(); k != nil; k, v = c.Next() {
 			temp := make(map[string]interface{})
